@@ -15,7 +15,7 @@ def lagrange(x, pontos_x, pontos_y):
                 l *= (x - pontos_x[i])/(pontos_x[j] - pontos_x[i])  
         op_lagrange.append(l)
 
-    p = 0 # valro de y interpolado em x
+    p = 0 # valor de y interpolado em x
     for i in range(n):
         p += pontos_y[i] * op_lagrange[i]
 
@@ -43,7 +43,7 @@ if __name__ == "__main__" :
                     continue
 
                 break
-        except TypeError:
+        except Exception:
             print("\nEntrada Inválida, tente novamente")
 
 
@@ -56,7 +56,7 @@ if __name__ == "__main__" :
     while(x == None):
         try:
             x = float(input("Insira o valor de x que você deseja calcular: "))
-        except TypeError:
+        except Exception:
             print("\nValor inválido")
             x = None
 
