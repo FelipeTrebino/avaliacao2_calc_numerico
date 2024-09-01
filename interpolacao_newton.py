@@ -33,54 +33,11 @@ def newton(x, pontos_x, pontos_y):
         dif *= np.prod([x - pontos_x[j] for j in range(i)]) # Multiplicação das diferenças em x (x - x0)(x - x1)...(x - xi-1)
         ponto += dif
     
-    erro = maior_valor_da_diferenca * np.prod([np.abs(x - pontos_x[j]) for j in range(n)]) # Cálculo do erro
+    erro = maior_valor_da_diferenca * np.prod([np.abs(x - pontos_x[j]) for j in range(n-1)]) # Cálculo do erro
     
-    return ponto, erro, ordens
-    
-"""    
-
-    print("\nImprimindo os resultados dos cálculos....................")
-    print("\t  y\t        x\t Resultado")
-    for linha in d:
-        print("[ ", end="")
-        for coluna in linha:
-            print(coluna, end="  ")
-        print("]")
-
-    ordem = 0
-    i = ordem
-    print("\nImprimindo as diferenças....................")
-    while ordem < qtd_pontos - 1:
-        dif = d[i][2]
-        print(f"d{ordem} = {dif}")
-        ordem += 1
-        i += qtd_pontos - ordem
-
-    ordem = 1
-    i = qtd_pontos - ordem
-    p = pontos_y[0] + d[0][2] * (x - pontos_x[0])
-    while ordem < qtd_pontos - 1:
-        aux = d[i][2]
-        for j in range(ordem + 1):
-            aux *= (x - pontos_x[j])
-        p -= aux
-        ordem += 1
-        i += qtd_pontos - ordem
-
-    print("\nImprimindo o resultado final....................")
-    print(f"O valor de P({x}) é {p}.")
-    """
-    
+    return ponto, erro, ordens    
     
 if __name__ == "__main__" :
-
-    pontos_x = [0,1,2,3]
-    pontos_y = [32,47,65,92]
-    ponto, erro, ordens = newton(1.8, pontos_x, pontos_y)
-
-    print(ponto, erro)
-
-    """
 
     print("\nInterpolação Polinomial - Método de Newton........")
 
@@ -102,7 +59,7 @@ if __name__ == "__main__" :
                     continue
 
                 break
-        except TypeError:
+        except Exception:
             print("\nEntrada Inválida, tente novamente")
 
 
@@ -115,14 +72,18 @@ if __name__ == "__main__" :
     while(x == None):
         try:
             x = float(input("Insira o valor de x que você deseja calcular: "))
-        except TypeError:
+        except Exception:
             print("\nValor inválido")
             x = None
 
-    
+    p, erro, ordens = newton(x, pontos_x, pontos_y)
         
+    print("\nImprimindo as diferenças....................")
+    for i in range(len(ordens)):
+        print(f"ordem {i} = {ordens[i]}")
 
     print("\nImprimindo o resultado final....................")
-    print(f"O valor de P({x}) é {p}.")
+    print(f"O valor de P({x}) é {p}, o erro estimado é {erro}.")
+
     
-    """
+    
